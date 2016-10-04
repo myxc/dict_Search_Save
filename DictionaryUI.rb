@@ -4,13 +4,12 @@ require_relative 'DictionarySearcher'
 require_relative 'ResultsSaver'
 
 #Handles User interaction loop (prompts for location of dictionary file)
-def loader(location)
+def loader(location)#WORKS FULLY
 	@a = DictionaryLoader.new
 	@a.open_local_file(location)
-	unless (@dict.is_empty)
-		puts "Dictionary successfully loaded."
-		@dict.format_terms
-		puts "formattermsworkxx"
+	unless (@a.dict.is_empty)
+		puts "Dictionary successfully loaded." 
+		@a.dict.format_terms
 	return
 	end
 end
@@ -21,7 +20,7 @@ while true
 		break
 	else
 		loader(@location)
-		@dict.dictionary_contents #displays number of words and how many of each letter
+		@a.dict.dictionary_contents #displays number of words and how many of each letter
 		b = DictionarySearcher.new
 		b.prompt_search #prompts diff search criterion
 		if @choice == 1
