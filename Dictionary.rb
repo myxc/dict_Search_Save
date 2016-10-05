@@ -1,7 +1,7 @@
 #wraps the loaded dictionary.
 require_relative 'DictionaryLoader'
 class Dictionary #class with instance variable that hold contents of dictionary
-	attr_accessor :dictionary
+	attr_accessor :dictionary, :stringdict
 	def initialize #WORKS
 		@dictionary = [] #initializes dictinoary as empty string
 	end
@@ -11,6 +11,9 @@ class Dictionary #class with instance variable that hold contents of dictionary
 			word.to_s.strip!
 		end
 		@stringdict = @dictionary.join(" ").to_s #one long string of words separated by spaces.
+	end
+	def get_dict
+		return @stringdict
 	end
 
 	def is_empty
@@ -24,15 +27,15 @@ class Dictionary #class with instance variable that hold contents of dictionary
 	def dictionary_contents #will output contents of the file
 		num = @dictionary.length
 		puts "Your dictionary contains #{num} words."
-		@Alphabet = ['\Aa', '\Bb', '\Cc', '\Dd', '\Ee', '\Ff', '\Gg', '\Hh', '\Ii', '\Jj', '\Kk', '\Ll', '\Mm', '\Nn', '\Oo', '\Pp', '\Qq', '\Rr', '\Ss', '\Tt', '\Uu', '\Vv', '\Ww', '\Xx', '\Yy', '\Zz']
+		#@Alphabet = ['\Aa', '\Bb', '\Cc', '\Dd', '\Ee', '\Ff', '\Gg', '\Hh', '\Ii', '\Jj', '\Kk', '\Ll', '\Mm', '\Nn', '\Oo', '\Pp', '\Qq', '\Rr', '\Ss', '\Tt', '\Uu', '\Vv', '\Ww', '\Xx', '\Yy', '\Zz']
 		#@Alphabet.split(/\s/)
 		#puts @Alphabet
-		if @Alphabet.is_a? String 
-			puts "is string"
-		else
-			puts "is array"
-			puts @Alphabet.join(" ")
-		end
+		#if @Alphabet.is_a? String 
+		#	puts "is string"
+		#else
+		#	puts "is array"
+		#	puts @Alphabet.join(" ")
+		#end
 #		@Alphabet.each do |reg|
 #			regex = "#{reg}"
 #			length = @stringdict.scan(/[\Aa]/).length

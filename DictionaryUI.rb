@@ -23,14 +23,15 @@ while true
 		@a.dict.dictionary_contents #displays number of words and how many of each letter
 		b = DictionarySearcher.new
 		b.prompt_search #prompts diff search criterion
-		if @choice == 1
-			exact_match
-		elsif @choice == 2
-			partial_match
-		elsif @choice == 3
-			beg_with
-		elsif @choice == 4
-			end_with
+		b.assign_dict(@a.dict.get_dict)
+		if b.choice == 1
+			b.exact_match
+		elsif b.choice == 2
+			b.partial_match
+		elsif b.choice == 3
+			b.beg_with
+		elsif b.choice == 4
+			b.end_with
 		end
 		#calls resultssaver after the search is conducted
 		c = ResultsSaver.new

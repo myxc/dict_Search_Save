@@ -10,8 +10,10 @@ class ResultsSaver
 		if %w(yes y ya yass Yes YES YEE).include?(gets.strip)
 			puts "Please enter the filepath that you want to save the file to: "
 			@save_path = gets.strip
+			puts @save_path
 		else
 			puts "okay"
+			return
 		end
 		if File.file?(@save_path)
 			puts "The file already exists, would you like to overwrite it? (Yes/no)"
@@ -20,13 +22,22 @@ class ResultsSaver
 				File.open("#{@save_path}", "w") do |file|
 					file.write("#{json_save}")
 				end
+				puts "File is saved to #{@save_path}"
 			else
 				puts "Not overwriting means that the serialized save information will be appended to the existing \nfile so it might screw up during parsing to deserialize it in the future."
 				json_save = @matches.to_json
 				File.open("#{@save_path}", "a") do |file|
 					file.write("#{json_save}")
 				end
+				puts "File is saved to #{@save_path}"
 			end
+		else
+			json_save = @matches.to_json
+			puts json_save
+			File.open("#{@save_path}", "w") do |file|
+				file.write("#{json_save}")
+			end
+			puts "File is saved to #{@save_path}"
 		end
 	end
 end

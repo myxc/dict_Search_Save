@@ -1,4 +1,5 @@
 require_relative 'Dictionary'
+require_relative 'DictionarySearcher'
 #takes the dictionary loaded and saves it as an instance of class Dictionary.
 class DictionaryLoader #WORKS FULLY.
 	attr_accessor :dict	
