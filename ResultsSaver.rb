@@ -5,7 +5,7 @@
 require 'json'
 require_relative 'DictionarySearcher'
 class ResultsSaver
-	def save_prompt
+	def save_prompt(dictionary)
 		puts "Would you like to save the results? (yes/no)"
 		if %w(yes y ya yass Yes YES YEE).include?(gets.strip)
 			puts "Please enter the filepath that you want to save the file to: "
@@ -18,21 +18,21 @@ class ResultsSaver
 		if File.file?(@save_path)
 			puts "The file already exists, would you like to overwrite it? (Yes/no)"
 			if %w(yes y ya yass Yes YES YEE).include?(gets.strip)
-				json_save = @matches.to_json
+				json_save = dictionary.to_json
 				File.open("#{@save_path}", "w") do |file|
 					file.write("#{json_save}")
 				end
 				puts "File is saved to #{@save_path}"
 			else
 				puts "Not overwriting means that the serialized save information will be appended to the existing \nfile so it might screw up during parsing to deserialize it in the future."
-				json_save = @matches.to_json
+				json_save = dictionary.to_json
 				File.open("#{@save_path}", "a") do |file|
 					file.write("#{json_save}")
 				end
 				puts "File is saved to #{@save_path}"
 			end
 		else
-			json_save = @matches.to_json
+			json_save = dictionary.to_json
 			puts json_save
 			File.open("#{@save_path}", "w") do |file|
 				file.write("#{json_save}")

@@ -1,19 +1,13 @@
 #wraps the loaded dictionary.
 require_relative 'DictionaryLoader'
 class Dictionary #class with instance variable that hold contents of dictionary
-	attr_accessor :dictionary, :stringdict
+	attr_accessor :dictionary
 	def initialize #WORKS
-		@dictionary = [] #initializes dictinoary as empty string
+		@dictionary = [] #initializes dictionary as empty array to be populated by words.
 	end
 
-	def format_terms #will remove the "\n" in each element.
-		@dictionary = @dictionary.each do |word|
-			word.to_s.strip!
-		end
-		@stringdict = @dictionary.join(" ").to_s #one long string of words separated by spaces.
-	end
 	def get_dict
-		return @stringdict
+		return @dictionary
 	end
 
 	def is_empty
@@ -25,76 +19,66 @@ class Dictionary #class with instance variable that hold contents of dictionary
 	end
 
 	def dictionary_contents #will output contents of the file
-		num = @dictionary.length
-		puts "Your dictionary contains #{num} words."
-		#@Alphabet = ['\Aa', '\Bb', '\Cc', '\Dd', '\Ee', '\Ff', '\Gg', '\Hh', '\Ii', '\Jj', '\Kk', '\Ll', '\Mm', '\Nn', '\Oo', '\Pp', '\Qq', '\Rr', '\Ss', '\Tt', '\Uu', '\Vv', '\Ww', '\Xx', '\Yy', '\Zz']
-		#@Alphabet.split(/\s/)
-		#puts @Alphabet
-		#if @Alphabet.is_a? String 
-		#	puts "is string"
-		#else
-		#	puts "is array"
-		#	puts @Alphabet.join(" ")
-		#end
-#		@Alphabet.each do |reg|
-#			regex = "#{reg}"
-#			length = @stringdict.scan(/[\Aa]/).length
-#			letter = reg.split(//)
-#			puts "#{letter[1]}: #{length}"
-#		end
-		#MY BLOCK IS NOT WORKING RAGHASHDFOSJAIDASJD
-		#time to do it like a pleb
-		@length = @stringdict.scan(/\b(a\w*)\b/).length
-		puts "A: #{@length}"
-		@length = @stringdict.scan(/\b(b\w*)\b/).length
-		puts "B: #{@length}"
-		@length = @stringdict.scan(/\b(c\w*)\b/).length
-		puts "C: #{@length}"
-		@length = @stringdict.scan(/\b(d\w*)\b/).length
-		puts ":D #{@length}"
-		@length = @stringdict.scan(/\b(e\w*)\b/).length
-		puts "E: #{@length}"
-		@length = @stringdict.scan(/\b(f\w*)\b/).length
-		puts "F: #{@length}"
-		@length = @stringdict.scan(/\b(g\w*)\b/).length
-		puts "G: #{@length}"
-		@length = @stringdict.scan(/\b(h\w*)\b/).length
-		puts "H: #{@length}"
-		@length = @stringdict.scan(/\b(i\w*)\b/).length
-		puts "I: #{@length}"
-		@length = @stringdict.scan(/\b(j\w*)\b/).length
-		puts "J: #{@length}"
-		@length = @stringdict.scan(/\b(k\w*)\b/).length
-		puts "K: #{@length}"
-		@length = @stringdict.scan(/\b(l\w*)\b/).length
-		puts "L: #{@length}"
-		@length = @stringdict.scan(/\b(m\w*)\b/).length
-		puts "M: #{@length}"
-		@length = @stringdict.scan(/\b(n\w*)\b/).length
-		puts "N: #{@length}"
-		@length = @stringdict.scan(/\b(o\w*)\b/).length
-		puts "O: #{@length}"
-		@length = @stringdict.scan(/\b(p\w*)\b/).length
-		puts "P: #{@length}"
-		@length = @stringdict.scan(/\b(q\w*)\b/).length
-		puts "Q: #{@length}"
-		@length = @stringdict.scan(/\b(r\w*)\b/).length
-		puts "R: #{@length}"
-		@length = @stringdict.scan(/\b(s\w*)\b/).length
-		puts "S: #{@length}"
-		@length = @stringdict.scan(/\b(t\w*)\b/).length
-		puts "T: #{@length}"
-		@length = @stringdict.scan(/\b(u\w*)\b/).length
-		puts "U: #{@length}"
-		@length = @stringdict.scan(/\b(v\w*)\b/).length
-		puts "V: #{@length}"
-		@length = @stringdict.scan(/\b(w\w*)\b/).length
-		puts "W: #{@length}"
-		@length = @stringdict.scan(/\b(x\w*)\b/).length
-		puts "X: #{@length}"
-		@length = @stringdict.scan(/\b(y\w*)\b/).length
-		puts "Y: #{@length}"
-		@length = @stringdict.scan(/\b(z\w*)\b/).length
-		puts "Z: #{@length}"
+		puts "Your dictionary contains #{@dictionary.length}"
+		@num_per_letter = Array.new(26, 0) #0 to 25 with value for how many times a word starts with that letter
+		@dictionary.each do |word|
+				if word =~ /\A[A]/i
+					@num_per_letter[0] += 1
+				elsif word =~ /\A[B]/i
+					@num_per_letter[1] += 1
+				elsif word =~ /\A[C]/i
+					@num_per_letter[2] += 1
+				elsif word =~ /\A[D]/i
+					@num_per_letter[3] += 1
+				elsif word =~ /\A[E]/i
+					@num_per_letter[4] += 1
+				elsif word =~ /\A[F]/i
+					@num_per_letter[5] += 1
+				elsif word =~ /\A[G]/i
+					@num_per_letter[6] += 1
+				elsif word =~ /\A[H]/i
+					@num_per_letter[7] += 1
+				elsif word =~ /\A[I]/i
+					@num_per_letter[8] += 1
+				elsif word =~ /\A[J]/i
+					@num_per_letter[9] += 1
+				elsif word =~ /\A[K]/i
+					@num_per_letter[10] += 1
+				elsif word =~ /\A[L]/i
+					@num_per_letter[11] += 1
+				elsif word =~ /\A[M]/i
+					@num_per_letter[12] += 1
+				elsif word =~ /\A[N]/i
+					@num_per_letter[13] += 1
+				elsif word =~ /\A[O]/i
+					@num_per_letter[14] += 1
+				elsif word =~ /\A[P]/i
+					@num_per_letter[15] += 1
+				elsif word =~ /\A[Q]/i
+					@num_per_letter[16] += 1
+				elsif word =~ /\A[R]/i
+					@num_per_letter[17] += 1
+				elsif word =~ /\A[S]/i
+					@num_per_letter[18] += 1
+				elsif word =~ /\A[T]/i
+					@num_per_letter[19] += 1
+				elsif word =~ /\A[U]/i
+					@num_per_letter[20] += 1
+				elsif word =~ /\A[V]/i
+					@num_per_letter[21] += 1
+				elsif word =~ /\A[W]/i
+					@num_per_letter[22] += 1
+				elsif word =~ /\A[X]/i
+					@num_per_letter[23] += 1
+				elsif word =~ /\A[Y]/i
+					@num_per_letter[24] += 1
+				elsif word =~ /\A[Z]/i
+					@num_per_letter[25] += 1
+				end
+		end
+		@num_per_letter.each_with_index do |num_per_letter, index|
+			letter = (index + 65).chr
+			puts "There are #{num_per_letter} of words that start with the letter #{letter}."
+		end
 	end
 end
