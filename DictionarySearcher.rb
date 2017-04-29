@@ -8,7 +8,6 @@ require_relative 'DictionaryLoader'
 class DictionarySearcher
 	attr_reader :choice, :matches, :search_term
 	def initialize
-		@matches = []
 	end
 
 	def prompt_search
@@ -19,7 +18,7 @@ class DictionarySearcher
 	end
 
 	def exact_match(dictionary, search_term)#regex mostly works needs improvement.
-		@matches = []
+		regex = /\b#{input}\b/i
 		dictionary.each do |word|
 			if word =~ /^#{search_term}$/
 				@matches << word
@@ -35,59 +34,25 @@ class DictionarySearcher
 		end
 		return @matches
 	end
+	
+	def search_exact(input)
+	    regex = /\b#{input}\b/i
+	    @matches = @dict_string.scan(regex)
+	  end
 
-	def partial_match(dictionary, search_term)#fix the regex 
-		@matches = []
-		dictionary.each do |word|
-			if word =~ /^.*#{search_term}.*$/
-				@matches << word
-			end
-		end
-		if @matches.length == 0
-			puts "No matches were found."
-			return 
-		end
-		puts "#{@matches.length} matches:"
-		@matches.each do |word|
-			puts "#{word}"
-		end
-		return @matches
-	end
+	  def search_partial(input)
+	    regex = /\b\w*#{input}\w*\b/i #is \b necessary? or does \w imply \b
+	    @matches = @dict_string.scan(regex)
+	  end
 
-	def beg_with(dictionary, search_term)#fix the regex 
-		@matches = []
-		dictionary.each do |word|
-			if word =~ /^#{search_term}.*$/
-				@matches << word
-			end
-		end
-		if @matches.length == 0
-			puts "No matches were found."
-			return 
-		end
-		puts "#{@matches.length} matches:"
-		@matches.each do |word|
-			puts "#{word}"
-		end
-		return @matches
-	end
+	  def search_begins_with(input)
+	    regex = /#{input}\w+/i
+	    @matches = @dict_string.scan(regex)
+	  end
 
-	def end_with(dictionary, search_term)#fix the regex 
-		@matches = []
-		dictionary.each do |word|
-			if word =~ /^.*#{search_term}$/
-				@matches << word
-			end
-		end
-		if @matches.length == 0
-			puts "No matches were found."
-			return 
-		end
-		puts "#{@matches.length} matches:"
-		@matches.each do |word|
-			puts "#{word}"
-		end
-		return @matches
-	end
+	  def search_ends_with(input)
+	    regex = /\w*#{input}\b/i
+	    @matches = @dict_string.scan(regex)
+	  end
 end
 #after search is complete, display number of matches as well as the matches themselves.
